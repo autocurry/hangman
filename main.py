@@ -6,41 +6,56 @@ message ='please enter a letter'
 def main():
     tries = 6
     tried =0
-    fullword = start()    
-    while(tried < tries) :
-        inputword = str(input()).upper()
-        print('word entered is',inputword)
-        tried += 1
-        if(inputword in fullword) :
-            print("Great!, you entered a correct letter")            
-        else:
-            print(f'You entered a wrong word, you have {tries} more tries remaining')
-        print(resultstring(fullword,inputword))
-        print(HANGED_MAN[tried])
+    guessedwords=[]
+    fullword = start()   
+    uniquelength = len(set(fullword))
+    finalmessage='Game Over, Do you want to play again'
+    while(tried < tries) :      
         print(' ')
         print(message)
-    print(HANGED_MAN[6])   
+        inputword = str(input()).upper()
+        #print('word entered is',inputword)        
+        if(inputword in fullword) :
+            print("Great!, you entered a correct letter")  
+            if (inputword not in guessedwords):
+                guessedwords.append(inputword)       
+        else:
+            tried += 1
+            print(f'You entered a wrong word, you have {tries-tried} more tries remaining')
+        print(resultstring(fullword,inputword,guessedwords))           
+        if(len(guessedwords) == uniquelength-1):
+            finalmessage = 'YAY!, you won. Do you want to play again'
+            break    
+        print(HANGED_MAN[tried])     
+    #print(HANGED_MAN[6])   
+    print(finalmessage)
+    option=input().upper()
+    if(option == 'Y'):
+        main()
+    else:
+        print('Thanks for Playing Hangman, see you later')
         
 
-def resultstring(onefullword,oneinputword):
+def resultstring(onefullword,oneinputword,oneguessedwords):
     for eachword in onefullword:
         if(eachword != ' '):
             if(oneinputword in eachword):
-                print(oneinputword, end =" ")
+                print(eachword, end =" ")
+            elif (eachword in oneguessedwords):
+                print(eachword, end =" ")
             else:
                 print('_', end =" ")
+        print(' ', end =" ")
 
 def start():
     word = random.choice(wordlist).upper()
     wordtolist = word.split(' ')
-    print("welcome to hangman game")
+    print("Welcome to HANGMAN game")
     for eachword in wordtolist:
         print('_ '*len(eachword), end =" ")
     print(' ')
     print(HANGED_MAN[0])
-    print(' ')
-    print(message)
-    print(word)
+    #print(word)
     return word
 
 HANGED_MAN = {

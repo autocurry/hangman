@@ -1,6 +1,8 @@
 wordlist = [
+    'appa loves mayi',
     'appa loves pinky',
     'anju loves appa',
+    'pinky loves poppy',
     'pinky hit poppy',
     'poppy bites pinky',
     'pinky eat banana',
