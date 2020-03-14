@@ -2,12 +2,27 @@ import tkinter as tk
 from tkinter import *
 
 root=tk.Tk()
-frame = tk.Frame(root, bg='#80c1ff', bd=4)
-frame.place(relx=0.5, rely=0.1, relwidth=0.75, relheight=0.3, anchor='n')
+root.title("Save the - INVESTOMAN")
+
+baseframe = tk.Frame(root,height=600,width=700)
+baseframe.pack()
+
+frame = tk.Frame(baseframe, bg='#80c1ff', bd=2)
+frame.place(relx=0.5, rely=0.1, relwidth=0.85, relheight=0.35, anchor='n')
+
+challengeframe = tk.Frame(frame, bg='#ffffff')
+challengeframe.place(relx=0.3, rely=0.05,relwidth=0.7, relheight=0.9, anchor='n')
+word = 'sandeep'
+for i in range(len(word)):
+    newButton = Button(challengeframe, fg="Black",text=str("A"), width=3,height=1,font=('Helvetica','20')) 
+    newButton.grid(column=i, row=1)
+
+hangmanframe = tk.Frame(frame, bg='#000000')
+hangmanframe.place(relx=0.9, rely=0.05,relwidth=0.5, relheight=0.9, anchor='n')
 
 
-lower_frame = tk.Frame(root, bg='#80c1ff', bd=4)
-lower_frame.place(relx=0.5, rely=0.5, relwidth=0.75, relheight=0.3, anchor='n')
+lower_frame = tk.Frame(baseframe, bg='#80c1ff', bd=3)
+lower_frame.place(relx=0.5, rely=0.5, relwidth=0.85, relheight=0.35, anchor='n')
 
 btn1 = Button(lower_frame, text="Q",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("Q"))
 btn1.grid(column=1, row=1)
