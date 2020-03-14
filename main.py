@@ -24,7 +24,7 @@ def main():
             print(f'You entered a wrong word, you have {tries-tried} more tries remaining')
         print(resultstring(fullword,inputword,guessedwords))           
         if(len(guessedwords) == uniquelength-1):
-            finalmessage = 'YAY!, you won. Do you want to play again'
+            finalmessage = 'YAY!, you won. Do you want to play again'            
             break    
         print(HANGED_MAN[tried])     
     #print(HANGED_MAN[6])   
@@ -48,7 +48,9 @@ def resultstring(onefullword,oneinputword,oneguessedwords):
         print(' ', end =" ")
 
 def start():
-    word = random.choice(wordlist).upper()
+    temp = random.choice(wordlist)
+    wordlist.remove(temp)
+    word = temp.upper()
     wordtolist = word.split(' ')
     print("Welcome to HANGMAN game")
     for eachword in wordtolist:
