@@ -1,18 +1,30 @@
 import tkinter as tk
 from tkinter import *
 from main import *
+import time
+
+balancetries = 6
+logmessages = {
+    0:"Welcome, You have 6 tries",
+    1:"Don't worry, you have 5 more tries",
+    2:"Be careful, you have 4 more tries",
+    3:"Please don't kill me, only 3 tries left",
+    4:"Common, think, use your brain, only 2 tries left",
+    5:"Un Belivable, you are killing me? only 1 try left",
+    6:"I'm Dead, please do some reading."
+}
 
 root=tk.Tk()
 root.title("Save the - INVESTOMAN")
 
-baseframe = tk.Frame(root,height=600,width=700)
+baseframe = tk.Frame(root,height=600,width=900)
 baseframe.pack()
 
 frame = tk.Frame(baseframe, bg='#80c1ff', bd=2)
 frame.place(relx=0.5, rely=0.1, relwidth=0.85, relheight=0.35, anchor='n')
 
 challengeframe = tk.Frame(frame, bg='#ffffff')
-challengeframe.place(relx=0.3, rely=0.05,relwidth=0.7, relheight=0.9, anchor='n')
+challengeframe.place(relx=0.35, rely=0.05,relwidth=0.8, relheight=0.9, anchor='n')
 
 challengeframe1 = tk.Frame(challengeframe,bg='#ffffff')
 challengeframe1.place(relx=0.5, rely=0.3,relwidth=0.8, relheight=0.6, anchor='n')
@@ -26,11 +38,28 @@ fullword = start()
 inputword=''
 guessedwords=[]
 word = resultstring(fullword,'',guessedwords)
+
+hangmanframe = tk.Frame(frame)
+hangmanframe.place(relx=0.95, rely=0.05,relwidth=0.5, relheight=0.9, anchor='n')
+hangmanimageframe=tk.Frame(hangmanframe,bg='#ffffff')
+hangmanimageframe.place(relx=0.4, rely=0.005,relwidth=0.7, relheight=0.8, anchor='n')
+def displayHangMan(hangmanstate):
+    text = Text(hangmanimageframe)
+    text.insert(INSERT, HANGED_MAN[hangmanstate])
+    text.pack()
+displayHangMan(6)
+
+hangmanlogframe = tk.Frame(hangmanframe,bg='#ffffff')
+hangmanlogframe.place(relx=0.4, rely=0.85,relwidth=0.7, relheight=0.2, anchor='n')
+def displayHangManLog(logmessage):
+    logtext=Text(hangmanlogframe)
+    logtext.insert(INSERT,logmessage)
+    logtext.pack()
+
+#Initial data displays
 printtoScreen(word)
-
-hangmanframe = tk.Frame(frame, bg='#000000')
-hangmanframe.place(relx=0.9, rely=0.05,relwidth=0.5, relheight=0.9, anchor='n')
-
+displayHangMan(0)
+displayHangManLog(logmessages[0])
 
 lower_frame = tk.Frame(baseframe, bg='#80c1ff', bd=3)
 lower_frame.place(relx=0.5, rely=0.5, relwidth=0.85, relheight=0.35, anchor='n')
@@ -90,17 +119,28 @@ btn36.grid(column=8, row=3)
 btn37 = Button(lower_frame, text="M",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("M"))
 btn37.grid(column=9, row=3)
 
+
 def clicked(alphabet):
+    global balancetries    
     global inputword
     global fullword
-    global guessedwords
+    global guessedwords    
     inputword = alphabet.upper()
-    if(inputword in fullword and inputword not in guessedwords):
-        guessedwords.append(inputword)
-    fill()
+    if(inputword in fullword):
+        if(inputword not in guessedwords):
+            guessedwords.append(inputword)
+    else:
+        balancetries -= 1    
+    fill()   
+    
+    if(balancetries ==0):
+        time.sleep(1)
+        
 
 def fill():
-    printtoScreen(resultstring(fullword,inputword,guessedwords)) 
+    printtoScreen(resultstring(fullword,inputword,guessedwords))
+    displayHangMan(balancetries) 
+    displayHangManLog(logmessages[balancetries])
 
 root.mainloop()
 

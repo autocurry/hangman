@@ -1,7 +1,7 @@
 wordlist = [
-    'chessboard',
-    'Breadbutter',      
-    'Tiktok',    
-    'Bicycle',
-    'Chiken'
+    'chessboardchess',
+    'demonitisation',      
+    'inflation',    
+    'swaps',
+    'derivative'
 ]
