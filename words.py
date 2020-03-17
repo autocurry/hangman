@@ -1,7 +1,7 @@
 wordlist = [
     'chessboard',
-    'Bread and butter',      
-    'Tiktok player',    
+    'Breadbutter',      
+    'Tiktok',    
     'Bicycle',
-    'Chiken leg piece'
+    'Chiken'
 ]

@@ -37,25 +37,37 @@ def main():
         
 
 def resultstring(onefullword,oneinputword,oneguessedwords):
-    for eachword in onefullword:
-        if(eachword != ' '):
-            if(oneinputword in eachword):
-                print(eachword, end =" ")
-            elif (eachword in oneguessedwords):
-                print(eachword, end =" ")
+    resultfull={}
+    if(len(oneguessedwords)==0):
+        for item in range(0,len(onefullword)):
+            resultfull[item]=' '
+        return resultfull
+    else:
+        for item in range(0, len(onefullword)):
+            if(onefullword[item] in oneguessedwords):
+                resultfull[item] = onefullword[item]
+            elif (onefullword[item] in oneinputword):
+                resultfull[item] = onefullword[item]
             else:
-                print('_', end =" ")
-        print(' ', end =" ")
+                resultfull[item] = ' '
+        return resultfull
+
+
+            
+    #for eachword in onefullword:
+        #if(eachword != ' '):
+            #if(oneinputword in eachword):
+                #print(eachword, end =" ")
+            #elif (eachword in oneguessedwords):
+                #print(eachword, end =" ")
+            #else:
+                #print('_', end =" ")
+        #print(' ', end =" ")
 
 def start():
     temp = random.choice(wordlist)
     wordlist.remove(temp)
-    word = temp.upper()
-    wordtolist = word.split(' ')
-    print("Welcome to HANGMAN game")
-    for eachword in wordtolist:
-        print('_ '*len(eachword), end =" ")
-    print(' ')
+    word = temp.upper()    
     print(HANGED_MAN[0])
     #print(word)
     return word
@@ -69,6 +81,3 @@ HANGED_MAN = {
         5: "     _______\n    |/      |\n    |      (_)\n    |      \\|/\n    |       |\n    |      / \n    |\n____|________\n",
         6: "     _______\n    |/      |\n    |      (_)\n    |      \\|/\n    |       |\n    |      / \\\n    |\n____|________\n"
     }
-
-if __name__=="__main__":
-    main()

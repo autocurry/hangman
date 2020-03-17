@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+from main import *
 
 root=tk.Tk()
 root.title("Save the - INVESTOMAN")
@@ -12,10 +13,20 @@ frame.place(relx=0.5, rely=0.1, relwidth=0.85, relheight=0.35, anchor='n')
 
 challengeframe = tk.Frame(frame, bg='#ffffff')
 challengeframe.place(relx=0.3, rely=0.05,relwidth=0.7, relheight=0.9, anchor='n')
-word = 'sandeep'
-for i in range(len(word)):
-    newButton = Button(challengeframe, fg="Black",text=str("A"), width=3,height=1,font=('Helvetica','20')) 
-    newButton.grid(column=i, row=1)
+
+challengeframe1 = tk.Frame(challengeframe,bg='#ffffff')
+challengeframe1.place(relx=0.5, rely=0.3,relwidth=0.8, relheight=0.6, anchor='n')
+
+def printtoScreen(resultingstring):
+    for letter in range(0, len(resultingstring)):
+        newButton = Button(challengeframe1, fg="Black",text=resultingstring[letter], width=2,height=1, font=('Helvetica','14')) 
+        newButton.grid(column=letter+1, row=1)
+
+fullword = start()
+inputword=''
+guessedwords=[]
+word = resultstring(fullword,'',guessedwords)
+printtoScreen(word)
 
 hangmanframe = tk.Frame(frame, bg='#000000')
 hangmanframe.place(relx=0.9, rely=0.05,relwidth=0.5, relheight=0.9, anchor='n')
@@ -80,8 +91,16 @@ btn37 = Button(lower_frame, text="M",bg="skyBlue", fg="Black",width=3,height=1,f
 btn37.grid(column=9, row=3)
 
 def clicked(alphabet):
-    pass
+    global inputword
+    global fullword
+    global guessedwords
+    inputword = alphabet.upper()
+    if(inputword in fullword and inputword not in guessedwords):
+        guessedwords.append(inputword)
+    fill()
 
+def fill():
+    printtoScreen(resultstring(fullword,inputword,guessedwords)) 
 
 root.mainloop()
 
