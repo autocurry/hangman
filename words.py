@@ -1,6 +1,7 @@
 wordlist = [
-    'chessboardchess',
-    'demonitisation',      
+    'LeyStreet',
+    'FairlopWaters',
+    'korekorekurkuree',      
     'inflation',    
     'swaps',
     'derivative'

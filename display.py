@@ -2,17 +2,19 @@ import tkinter as tk
 from tkinter import *
 from main import *
 import time
+from tkinter import messagebox
 
 balancetries = 6
 logmessages = {
-    0:"Welcome, You have 6 tries",
-    1:"Don't worry, you have 5 more tries",
-    2:"Be careful, you have 4 more tries",
+    6:"Welcome, You have 6 tries",
+    5:"Don't worry, you have 5 more tries",
+    4:"Be careful, you have 4 more tries",
     3:"Please don't kill me, only 3 tries left",
-    4:"Common, think, use your brain, only 2 tries left",
-    5:"Un Belivable, you are killing me? only 1 try left",
-    6:"I'm Dead, please do some reading."
+    2:"Common, think, use your brain, only 2 tries left",
+    1:"Un Belivable, you are killing me? only 1 try left",
+    0:"I'm Dead, please do some reading."
 }
+
 
 root=tk.Tk()
 root.title("Save the - INVESTOMAN")
@@ -28,41 +30,16 @@ challengeframe.place(relx=0.35, rely=0.05,relwidth=0.8, relheight=0.9, anchor='n
 
 challengeframe1 = tk.Frame(challengeframe,bg='#ffffff')
 challengeframe1.place(relx=0.5, rely=0.3,relwidth=0.8, relheight=0.6, anchor='n')
-
-def printtoScreen(resultingstring):
-    for letter in range(0, len(resultingstring)):
-        newButton = Button(challengeframe1, fg="Black",text=resultingstring[letter], width=2,height=1, font=('Helvetica','14')) 
-        newButton.grid(column=letter+1, row=1)
-
-fullword = start()
-inputword=''
-guessedwords=[]
-word = resultstring(fullword,'',guessedwords)
+lower_frame = tk.Frame(baseframe, bg='#80c1ff', bd=3)
+lower_frame.place(relx=0.5, rely=0.5, relwidth=0.85, relheight=0.35, anchor='n')
 
 hangmanframe = tk.Frame(frame)
 hangmanframe.place(relx=0.95, rely=0.05,relwidth=0.5, relheight=0.9, anchor='n')
 hangmanimageframe=tk.Frame(hangmanframe,bg='#ffffff')
 hangmanimageframe.place(relx=0.4, rely=0.005,relwidth=0.7, relheight=0.8, anchor='n')
-def displayHangMan(hangmanstate):
-    text = Text(hangmanimageframe)
-    text.insert(INSERT, HANGED_MAN[hangmanstate])
-    text.pack()
-displayHangMan(6)
-
 hangmanlogframe = tk.Frame(hangmanframe,bg='#ffffff')
 hangmanlogframe.place(relx=0.4, rely=0.85,relwidth=0.7, relheight=0.2, anchor='n')
-def displayHangManLog(logmessage):
-    logtext=Text(hangmanlogframe)
-    logtext.insert(INSERT,logmessage)
-    logtext.pack()
 
-#Initial data displays
-printtoScreen(word)
-displayHangMan(0)
-displayHangManLog(logmessages[0])
-
-lower_frame = tk.Frame(baseframe, bg='#80c1ff', bd=3)
-lower_frame.place(relx=0.5, rely=0.5, relwidth=0.85, relheight=0.35, anchor='n')
 
 btn1 = Button(lower_frame, text="Q",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("Q"))
 btn1.grid(column=1, row=1)
@@ -118,6 +95,39 @@ btn36 = Button(lower_frame, text="N",bg="skyBlue", fg="Black",width=3,height=1,f
 btn36.grid(column=8, row=3)
 btn37 = Button(lower_frame, text="M",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("M"))
 btn37.grid(column=9, row=3)
+text = Text(hangmanimageframe)
+text.pack()
+logtext=Text(hangmanlogframe)
+logtext.pack()
+fullword = ''
+inputword=''
+guessedwords=[]
+
+
+
+def printtoScreen(resultingstring):
+    for letter in range(0, len(resultingstring)):
+        newButton = Button(challengeframe1, fg="Black",text=resultingstring[letter], width=2,height=1, font=('Helvetica','14')) 
+        newButton.grid(column=letter+1, row=1)
+def displayHangMan(hangmanstate):   
+    text.delete(1.0,END)
+    text.insert(INSERT, HANGED_MAN[hangmanstate])
+    text.pack()
+def displayHangManLog(logmessage):
+    logtext.delete(1.0,END)
+    logtext.insert(INSERT,logmessage)
+    
+def startthegame():   
+    global fullword
+    fullword = start() 
+    word = resultstring(fullword,'',guessedwords)    
+    text.insert(INSERT, HANGED_MAN[6])
+    logtext.insert(INSERT,"Welcome, You have 6 tries")
+    logtext.pack()
+    #Initial data displays
+    printtoScreen(word)
+    displayHangMan(6)
+    displayHangManLog(logmessages[6])
 
 
 def clicked(alphabet):
@@ -133,14 +143,19 @@ def clicked(alphabet):
         balancetries -= 1    
     fill()   
     
-    if(balancetries ==0):
-        time.sleep(1)
+    if(balancetries ==0):                
+        if (messagebox.askyesno("Game Over","You lose !!, Do you want to play again ?") == True):
+            startthegame()
+        else:
+            root.destroy()
         
 
-def fill():
+def fill():  
     printtoScreen(resultstring(fullword,inputword,guessedwords))
     displayHangMan(balancetries) 
     displayHangManLog(logmessages[balancetries])
+
+startthegame()
 
 root.mainloop()
 
