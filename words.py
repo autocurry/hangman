@@ -1,8 +1,7 @@
 wordlist = [
-    'LeyStreet',
-    'FairlopWaters',
-    'korekorekurkuree',      
-    'inflation',    
-    'swaps',
-    'derivative'
+    'China',
+    'iran',
+    'Canada',
+    'ireland',
+    'france'
 ]

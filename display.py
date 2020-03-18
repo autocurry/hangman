@@ -102,10 +102,13 @@ logtext.pack()
 fullword = ''
 inputword=''
 guessedwords=[]
+uniqueletterscount=0
 
 
 
 def printtoScreen(resultingstring):
+    for newButton in challengeframe1.grid_slaves():
+        newButton.grid_forget()
     for letter in range(0, len(resultingstring)):
         newButton = Button(challengeframe1, fg="Black",text=resultingstring[letter], width=2,height=1, font=('Helvetica','14')) 
         newButton.grid(column=letter+1, row=1)
@@ -119,7 +122,12 @@ def displayHangManLog(logmessage):
     
 def startthegame():   
     global fullword
+    global uniqueletterscount   
+    global balancetries
+    balancetries = 6 
     fullword = start() 
+    guessedwords.clear()
+    uniqueletterscount = len(list(set(fullword)))
     word = resultstring(fullword,'',guessedwords)    
     text.insert(INSERT, HANGED_MAN[6])
     logtext.insert(INSERT,"Welcome, You have 6 tries")
@@ -134,21 +142,25 @@ def clicked(alphabet):
     global balancetries    
     global inputword
     global fullword
-    global guessedwords    
-    inputword = alphabet.upper()
+    global guessedwords  
+    global uniqueletterscount  
+    inputword = alphabet.upper()    
     if(inputword in fullword):
         if(inputword not in guessedwords):
             guessedwords.append(inputword)
     else:
         balancetries -= 1    
-    fill()   
-    
+    fill()       
     if(balancetries ==0):                
         if (messagebox.askyesno("Game Over","You lose !!, Do you want to play again ?") == True):
             startthegame()
         else:
             root.destroy()
-        
+    if(len(guessedwords)==uniqueletterscount):
+        if (messagebox.askyesno("You Won","YAY You Won !!, Do you want to play again ?") == True):
+            startthegame()
+        else:
+            root.destroy()
 
 def fill():  
     printtoScreen(resultstring(fullword,inputword,guessedwords))
