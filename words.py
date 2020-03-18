@@ -1,18 +1,7 @@
 wordlist = [
-    'appa loves mayi',
-    'appa loves pinky',
-    'anju loves appa',
-    'pinky loves poppy',
-    'pinky hit poppy',
-    'poppy bites pinky',
-    'pinky eat banana',
-    'mayi is fat',
-    'mayi love pinky',
-    'mamma is angry',
-    'achan is angry',
-    'pinky love achan',
-    'pinky love cricket',
-    'mayi love tiktok',
-    'appa love football'
-
+    'China',
+    'iran',
+    'Canada',
+    'ireland',
+    'france'
 ]
