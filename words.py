@@ -1,7 +1,4 @@
 wordlist = [
-    'China',
-    'iran',
-    'Canada',
-    'ireland',
-    'france'
+    ['test','some clues'],
+    ['test2','some more clues']
 ]

@@ -18,12 +18,12 @@ def resultstring(onefullword,oneinputword,oneguessedwords):
         return resultfull
 
 def start():
-    temp = random.choice(wordlist)
-    wordlist.remove(temp)
-    word = temp.upper()    
-    print(HANGED_MAN[0])
-    #print(word)
-    return word
+    try:
+        temp = random.choice(wordlist)
+        wordlist.remove(temp)     
+        return temp
+    except:
+        return None
 
 HANGED_MAN = {
         6: "     _______\n    |/      |\n    |      \n    |      \n    |       \n    |      \n    |\n____|________\n",
