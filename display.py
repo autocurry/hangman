@@ -22,8 +22,9 @@ root.title("Save the - INVESTOMAN")
 baseframe = tk.Frame(root,height=600,width=900)
 baseframe.pack()
 
-frame = tk.Frame(baseframe, bg='#80c1ff', bd=2)
+frame = tk.Frame(baseframe, bg='#80c1ff')
 frame.place(relx=0.5, rely=0.1, relwidth=0.85, relheight=0.35, anchor='n')
+
 
 challengeframe = tk.Frame(frame, bg='#ffffff')
 challengeframe.place(relx=0.35, rely=0.05,relwidth=0.8, relheight=0.9, anchor='n')
@@ -33,7 +34,7 @@ challengeframe1.place(relx=0.5, rely=0.2,relwidth=0.8, relheight=0.5, anchor='n'
 clueframe=tk.Frame(challengeframe, bg='#000000')
 clueframe.place(relx=0.5, rely=0.6,relwidth=0.8, relheight=0.7, anchor='n')
 
-lower_frame = tk.Frame(baseframe, bg='#80c1ff', bd=3)
+lower_frame = tk.Frame(baseframe, bg='#80c1ff')
 lower_frame.place(relx=0.5, rely=0.5, relwidth=0.85, relheight=0.35, anchor='n')
 
 hangmanframe = tk.Frame(frame)
@@ -102,12 +103,12 @@ text = Text(hangmanimageframe)
 text.pack()
 logtext=Text(hangmanlogframe)
 logtext.pack()
+cluetext = Text(clueframe)
+cluetext.pack()
 fullword = ''
 inputword=''
 guessedwords=[]
 uniqueletterscount=0
-
-
 
 def printtoScreen(resultingstring):
     for newButton in challengeframe1.grid_slaves():
@@ -136,10 +137,9 @@ def startthegame():
         root.destroy()
     guessedwords.clear()
     fullword = fullwordlist[0].upper()
-    clue = fullwordlist[1]
-    cluetext = Text(clueframe)
-    cluetext.insert(INSERT,clue)
-    cluetext.pack()
+    clue = fullwordlist[1]    
+    cluetext.delete(1.0,END)
+    cluetext.insert(INSERT,clue)    
     uniqueletterscount = len(list(set(fullword)))
     word = resultstring(fullword,'',guessedwords)    
     text.insert(INSERT, HANGED_MAN[6])
