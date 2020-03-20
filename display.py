@@ -103,7 +103,7 @@ text = Text(hangmanimageframe)
 text.pack()
 logtext=Text(hangmanlogframe)
 logtext.pack()
-cluetext = Text(clueframe)
+cluetext = Text(clueframe, borderwidth=15, relief=tk.FLAT)
 cluetext.pack()
 fullword = ''
 inputword=''
