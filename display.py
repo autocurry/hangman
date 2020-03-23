@@ -4,6 +4,7 @@ from main import *
 import time
 from tkinter import messagebox
 
+score='some score'
 balancetries = 6
 logmessages = {
     6:"Welcome, You have 6 tries",
@@ -14,13 +15,31 @@ logmessages = {
     1:"Unbelivable,you are \n killing me. 1 try left",
     0:"I'm Dead, please do \n some reading."
 }
-
+starttime = time.time 
 
 root=tk.Tk()
 root.title("Save the - INVESTOMAN")
 
 baseframe = tk.Frame(root,height=600,width=900)
 baseframe.pack()
+
+totalframe = tk.Frame(baseframe, bg='#ffffff')
+totalframe.place(relx=0.5,rely=0,relwidth=0.85,relheight=0.1,anchor='n')
+
+scorelabel = tk.Label(totalframe, text="  Total Score:  ",bg="white",fg="Black",font=('Helvetica','16'))
+scorelabel.grid(column=0,row=0)
+
+scorevalue = tk.Entry(totalframe,bg="skyBlue",fg="Black",font=('Helvetica','16'),width=5)
+scorevalue.grid(column=3,row=0)
+
+watchlabel = tk.Label(totalframe,text="  Time Elapsed:  ",bg="white",fg="Black",font=('Helvetica','16'))
+watchlabel.grid(column=7,row=0)
+
+watchvalue=tk.Entry(totalframe,bg="skyBlue",fg="Black",font=('Helvetica','16'),width=5)
+watchvalue.grid(column=10,row=0)
+
+scorevalue.delete(0,END)
+scorevalue.insert(0,"text")
 
 frame = tk.Frame(baseframe, bg='#80c1ff')
 frame.place(relx=0.5, rely=0.1, relwidth=0.85, relheight=0.35, anchor='n')
