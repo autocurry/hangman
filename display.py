@@ -7,12 +7,12 @@ from tkinter import messagebox
 balancetries = 6
 logmessages = {
     6:"Welcome, You have 6 tries",
-    5:"Don't worry, you have 5 more tries",
-    4:"Be careful, you have 4 more tries",
-    3:"Please don't kill me, only 3 tries left",
-    2:"Common, think, use your brain, only 2 tries left",
-    1:"Un Belivable, you are killing me? only 1 try left",
-    0:"I'm Dead, please do some reading."
+    5:"Don't worry, you \n have 5 more tries",
+    4:"Be careful, you have \n 4 more tries",
+    3:"Please don't kill me, \n only 3 tries left",
+    2:"Common, think, use your \n brain, only 2 tries left",
+    1:"Unbelivable,you are \n killing me. 1 try left",
+    0:"I'm Dead, please do \n some reading."
 }
 
 
@@ -22,15 +22,19 @@ root.title("Save the - INVESTOMAN")
 baseframe = tk.Frame(root,height=600,width=900)
 baseframe.pack()
 
-frame = tk.Frame(baseframe, bg='#80c1ff', bd=2)
+frame = tk.Frame(baseframe, bg='#80c1ff')
 frame.place(relx=0.5, rely=0.1, relwidth=0.85, relheight=0.35, anchor='n')
+
 
 challengeframe = tk.Frame(frame, bg='#ffffff')
 challengeframe.place(relx=0.35, rely=0.05,relwidth=0.8, relheight=0.9, anchor='n')
 
 challengeframe1 = tk.Frame(challengeframe,bg='#ffffff')
-challengeframe1.place(relx=0.5, rely=0.3,relwidth=0.8, relheight=0.6, anchor='n')
-lower_frame = tk.Frame(baseframe, bg='#80c1ff', bd=3)
+challengeframe1.place(relx=0.5, rely=0.2,relwidth=0.8, relheight=0.5, anchor='n')
+clueframe=tk.Frame(challengeframe, bg='#000000')
+clueframe.place(relx=0.5, rely=0.6,relwidth=0.8, relheight=0.7, anchor='n')
+
+lower_frame = tk.Frame(baseframe, bg='#80c1ff')
 lower_frame.place(relx=0.5, rely=0.5, relwidth=0.85, relheight=0.35, anchor='n')
 
 hangmanframe = tk.Frame(frame)
@@ -38,7 +42,7 @@ hangmanframe.place(relx=0.95, rely=0.05,relwidth=0.5, relheight=0.9, anchor='n')
 hangmanimageframe=tk.Frame(hangmanframe,bg='#ffffff')
 hangmanimageframe.place(relx=0.4, rely=0.005,relwidth=0.7, relheight=0.8, anchor='n')
 hangmanlogframe = tk.Frame(hangmanframe,bg='#ffffff')
-hangmanlogframe.place(relx=0.4, rely=0.85,relwidth=0.7, relheight=0.2, anchor='n')
+hangmanlogframe.place(relx=0.475, rely=0.75,relwidth=0.85, relheight=0.5, anchor='n')
 
 
 btn1 = Button(lower_frame, text="Q",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("Q"))
@@ -99,12 +103,12 @@ text = Text(hangmanimageframe)
 text.pack()
 logtext=Text(hangmanlogframe)
 logtext.pack()
+cluetext = Text(clueframe, borderwidth=15, relief=tk.FLAT)
+cluetext.pack()
 fullword = ''
 inputword=''
 guessedwords=[]
 uniqueletterscount=0
-
-
 
 def printtoScreen(resultingstring):
     for newButton in challengeframe1.grid_slaves():
@@ -119,14 +123,23 @@ def displayHangMan(hangmanstate):
 def displayHangManLog(logmessage):
     logtext.delete(1.0,END)
     logtext.insert(INSERT,logmessage)
+def Windupthegame():
+    messagebox.showinfo("Game Over", "You reached the end of Game")
     
 def startthegame():   
     global fullword
     global uniqueletterscount   
     global balancetries
     balancetries = 6 
-    fullword = start() 
+    fullwordlist = start() 
+    if(fullwordlist is None):
+        Windupthegame()
+        root.destroy()
     guessedwords.clear()
+    fullword = fullwordlist[0].upper()
+    clue = fullwordlist[1]    
+    cluetext.delete(1.0,END)
+    cluetext.insert(INSERT,clue)    
     uniqueletterscount = len(list(set(fullword)))
     word = resultstring(fullword,'',guessedwords)    
     text.insert(INSERT, HANGED_MAN[6])
