@@ -19,6 +19,8 @@ logmessages = {
 _start = time.time()     
 _elapsedtime = 0.0
 _timer = None
+totalscore = len(wordlist)
+correctanswer = 0
 
 
 root=tk.Tk()
@@ -41,9 +43,6 @@ watchlabel.grid(column=7,row=0)
 
 watchvalue=tk.Entry(totalframe,bg="skyBlue",fg="Black",font=('Helvetica','16'),width=10)
 watchvalue.grid(column=10,row=0)
-
-scorevalue.delete(0,END)
-scorevalue.insert(0,"text")
 
 frame = tk.Frame(baseframe, bg='#80c1ff')
 frame.place(relx=0.5, rely=0.1, relwidth=0.85, relheight=0.35, anchor='n')
@@ -147,12 +146,17 @@ def displayHangManLog(logmessage):
     logtext.delete(1.0,END)
     logtext.insert(INSERT,logmessage)
 def Windupthegame():
-    messagebox.showinfo("Game Over", "You reached the end of Game")
+    stopTimer()
+    messagebox.showinfo("Game Over", f'You reached the end of Game \n Your total score is: {scorevalue.get()} \n Your time is: {watchvalue.get()}')
     
 def startthegame():   
     global fullword
     global uniqueletterscount   
     global balancetries
+    global totalscore
+    global correctanswer
+    scorevalue.delete(0,END)
+    scorevalue.insert(0,f'{correctanswer} / {totalscore}')
     balancetries = 6     
     fullwordlist = start() 
     if(fullwordlist is None):
@@ -182,8 +186,10 @@ def startTimer():
     hseconds = int((_elapsedtime - minutes*60.0 - seconds)*100)
     watchvalue.delete(0,END)
     watchvalue.insert(0,'%02d:%02d:%02d' % (minutes, seconds, hseconds))               
-    _timer = watchvalue.after(50, startTimer)         
-
+    _timer = watchvalue.after(50, startTimer)
+def stopTimer():
+    global _timer
+    watchvalue.after_cancel(_timer)
 def clicked(alphabet):
     global balancetries    
     global inputword
@@ -198,16 +204,16 @@ def clicked(alphabet):
         balancetries -= 1    
     fill()       
     if(balancetries ==0):                
-        if (messagebox.askyesno("Game Over","You lose !!, Do you want to play again ?") == True):
+        if (messagebox.askyesno("You Lose", "You lose !!, You want to try another one ?") == True):
             startthegame()
-        else:
-            #stopTimer()
+        else:           
             root.destroy()
     if(len(guessedwords)==uniqueletterscount):
-        if (messagebox.askyesno("You Won","YAY You Won !!, Do you want to play again ?") == True):
+        global correctanswer
+        correctanswer += 1
+        if (messagebox.askyesno("You Won","YAY You Won !!, You want to try another one ?") == True):
             startthegame()
-        else:
-            #stopTimer()
+        else:            
             root.destroy()
 
 def fill():  
