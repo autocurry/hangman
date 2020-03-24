@@ -15,7 +15,11 @@ logmessages = {
     1:"Unbelivable,you are \n killing me. 1 try left",
     0:"I'm Dead, please do \n some reading."
 }
-starttime = time.time 
+
+_start = time.time()     
+_elapsedtime = 0.0
+_timer = None
+
 
 root=tk.Tk()
 root.title("Save the - INVESTOMAN")
@@ -35,7 +39,7 @@ scorevalue.grid(column=3,row=0)
 watchlabel = tk.Label(totalframe,text="  Time Elapsed:  ",bg="white",fg="Black",font=('Helvetica','16'))
 watchlabel.grid(column=7,row=0)
 
-watchvalue=tk.Entry(totalframe,bg="skyBlue",fg="Black",font=('Helvetica','16'),width=5)
+watchvalue=tk.Entry(totalframe,bg="skyBlue",fg="Black",font=('Helvetica','16'),width=10)
 watchvalue.grid(column=10,row=0)
 
 scorevalue.delete(0,END)
@@ -149,7 +153,7 @@ def startthegame():
     global fullword
     global uniqueletterscount   
     global balancetries
-    balancetries = 6 
+    balancetries = 6     
     fullwordlist = start() 
     if(fullwordlist is None):
         Windupthegame()
@@ -168,7 +172,17 @@ def startthegame():
     printtoScreen(word)
     displayHangMan(6)
     displayHangManLog(logmessages[6])
-
+def startTimer(): 
+    global _start
+    global _elapsedtime
+    global _timer    
+    _elapsedtime = time.time() - _start
+    minutes = int(_elapsedtime/60)
+    seconds = int(_elapsedtime - minutes*60.0)
+    hseconds = int((_elapsedtime - minutes*60.0 - seconds)*100)
+    watchvalue.delete(0,END)
+    watchvalue.insert(0,'%02d:%02d:%02d' % (minutes, seconds, hseconds))               
+    _timer = watchvalue.after(50, startTimer)         
 
 def clicked(alphabet):
     global balancetries    
@@ -187,18 +201,21 @@ def clicked(alphabet):
         if (messagebox.askyesno("Game Over","You lose !!, Do you want to play again ?") == True):
             startthegame()
         else:
+            #stopTimer()
             root.destroy()
     if(len(guessedwords)==uniqueletterscount):
         if (messagebox.askyesno("You Won","YAY You Won !!, Do you want to play again ?") == True):
             startthegame()
         else:
+            #stopTimer()
             root.destroy()
 
 def fill():  
     printtoScreen(resultstring(fullword,inputword,guessedwords))
     displayHangMan(balancetries) 
-    displayHangManLog(logmessages[balancetries])
+    displayHangManLog(logmessages[balancetries])            
 
+startTimer()       
 startthegame()
 
 root.mainloop()
