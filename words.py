@@ -1,7 +1,15 @@
 wordlist = [
-    'China',
-    'iran',
-    'Canada',
-    'ireland',
-    'france'
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test']
+
 ]
