@@ -35,7 +35,7 @@ totalframe.place(relx=0.5,rely=0,relwidth=0.85,relheight=0.1,anchor='n')
 scorelabel = tk.Label(totalframe, text="  Total Score:  ",bg="white",fg="Black",font=('Helvetica','16'))
 scorelabel.grid(column=0,row=0)
 
-scorevalue = tk.Entry(totalframe,bg="skyBlue",fg="Black",font=('Helvetica','16'),width=5)
+scorevalue = tk.Entry(totalframe,bg="skyBlue",fg="Black",font=('Helvetica','16'),width=6)
 scorevalue.grid(column=3,row=0)
 
 watchlabel = tk.Label(totalframe,text="  Time Elapsed:  ",bg="white",fg="Black",font=('Helvetica','16'))
@@ -125,7 +125,7 @@ text = Text(hangmanimageframe)
 text.pack()
 logtext=Text(hangmanlogframe)
 logtext.pack()
-cluetext = Text(clueframe, borderwidth=15, relief=tk.FLAT)
+cluetext = Text(clueframe, borderwidth=15, relief=tk.FLAT,font=('Helvetica','18'))
 cluetext.pack()
 fullword = ''
 inputword=''
