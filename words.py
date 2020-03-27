@@ -1,4 +1,15 @@
 wordlist = [
-    ['test','some clues'],
-    ['testing','test more clues']
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test'],
+ ['test','test']
+
 ]
