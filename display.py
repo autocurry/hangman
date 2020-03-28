@@ -75,7 +75,7 @@ text = Text(hangmanimageframe)
 text.pack()
 logtext=Text(hangmanlogframe)
 logtext.pack()
-cluetext = Text(clueframe, borderwidth=15, relief=tk.FLAT,font=('Helvetica','18'))
+cluetext = Text(clueframe, borderwidth=15, relief=tk.FLAT,font=('Helvetica','15'))
 cluetext.pack()
 fullword = ''
 inputword=''
