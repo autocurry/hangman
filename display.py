@@ -15,6 +15,11 @@ logmessages = {
     1:"Unbelivable,you are \n killing me. 1 try left",
     0:"I'm Dead, please do \n some reading."
 }
+alphabetsrow = [
+        ['Q','W','E','R','T','Y','U','I','O','P'],
+        ['A','S','D','F','G','H','J','K','L'],
+        ['Z','X','C','V','B','N','M']
+     ]
 
 _start = time.time()     
 _elapsedtime = 0.0
@@ -66,23 +71,6 @@ hangmanimageframe.place(relx=0.4, rely=0.005,relwidth=0.7, relheight=0.8, anchor
 hangmanlogframe = tk.Frame(hangmanframe,bg='#ffffff')
 hangmanlogframe.place(relx=0.475, rely=0.75,relwidth=0.85, relheight=0.5, anchor='n')
 
-def createkeyboard():
-    alphabetsrow = [
-        ['Q','W','E','R','T','Y','U','I','O','P'],
-        ['A','S','D','F','G','H','J','K','L'],
-        ['Z','X','C','V','B','N','M']
-     ]
-    i = 0
-    j = 0
-    for row in alphabetsrow:
-        for letter in row:
-            buttonprint = Button(lower_frame,text=letter.upper(),bg="skyBlue",fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked(letter))
-            buttonprint.grid(column=i,row=j)
-            i+=1
-        j+=1
-        i=j
-
-createkeyboard()
 text = Text(hangmanimageframe)
 text.pack()
 logtext=Text(hangmanlogframe)
@@ -152,12 +140,19 @@ def startTimer():
 def stopTimer():
     global _timer
     watchvalue.after_cancel(_timer)
-def clicked(alphabet):
+
+def fill():  
+    printtoScreen(resultstring(fullword,inputword,guessedwords))
+    displayHangMan(balancetries) 
+    displayHangManLog(logmessages[balancetries])  
+
+def clicked(alphabet):       
     global balancetries    
     global inputword
     global fullword
     global guessedwords  
     global uniqueletterscount  
+    global alphabetsrow    
     inputword = alphabet.upper()    
     if(inputword in fullword):
         if(inputword not in guessedwords):
@@ -178,10 +173,20 @@ def clicked(alphabet):
         else:            
             root.destroy()
 
-def fill():  
-    printtoScreen(resultstring(fullword,inputword,guessedwords))
-    displayHangMan(balancetries) 
-    displayHangManLog(logmessages[balancetries])            
+
+def createkeyboard():
+    global alphabetsrow
+    i = 0
+    j = 0
+    for row in alphabetsrow:
+        for letter in row:
+            buttonprint = Button(lower_frame,text=letter.upper(),bg="skyBlue",fg="Black",width=3,height=1,font=('Helvetica','20'),command= lambda t=letter: clicked(t))            
+            buttonprint.grid(column=i,row=j)            
+            i+=1
+        j+=1
+        i=j
+
+createkeyboard()     
 
 startTimer()       
 startthegame()
