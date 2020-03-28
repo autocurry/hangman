@@ -1,5 +1,6 @@
 from words import wordlist
-import random       
+import random  
+
 
 def resultstring(onefullword,oneinputword,oneguessedwords):
     resultfull={}

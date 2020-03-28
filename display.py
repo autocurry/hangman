@@ -15,6 +15,11 @@ logmessages = {
     1:"Unbelivable,you are \n killing me. 1 try left",
     0:"I'm Dead, please do \n some reading."
 }
+alphabetsrow = [
+        ['Q','W','E','R','T','Y','U','I','O','P'],
+        ['A','S','D','F','G','H','J','K','L'],
+        ['Z','X','C','V','B','N','M']
+     ]
 
 _start = time.time()     
 _elapsedtime = 0.0
@@ -66,61 +71,6 @@ hangmanimageframe.place(relx=0.4, rely=0.005,relwidth=0.7, relheight=0.8, anchor
 hangmanlogframe = tk.Frame(hangmanframe,bg='#ffffff')
 hangmanlogframe.place(relx=0.475, rely=0.75,relwidth=0.85, relheight=0.5, anchor='n')
 
-
-btn1 = Button(lower_frame, text="Q",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("Q"))
-btn1.grid(column=1, row=1)
-btn2 = Button(lower_frame, text="W",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("W"))
-btn2.grid(column=2, row=1)
-btn3 = Button(lower_frame, text="E",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("E"))
-btn3.grid(column=3, row=1)
-btn4 = Button(lower_frame, text="R",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("R"))
-btn4.grid(column=4, row=1)
-btn5 = Button(lower_frame, text="T",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("T"))
-btn5.grid(column=5, row=1)
-btn6 = Button(lower_frame, text="Y",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("Y"))
-btn6.grid(column=6, row=1)
-btn7 = Button(lower_frame, text="U",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("U"))
-btn7.grid(column=7, row=1)
-btn8 = Button(lower_frame, text="I",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("I"))
-btn8.grid(column=8, row=1)
-btn9 = Button(lower_frame, text="O",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("O"))
-btn9.grid(column=9, row=1)
-btn10 = Button(lower_frame, text="P",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("P"))
-btn10.grid(column=10, row=1)
-
-btn11 = Button(lower_frame, text="A",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("A"))
-btn11.grid(column=2, row=2)
-btn12 = Button(lower_frame, text="S",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("S"))
-btn12.grid(column=3, row=2)
-btn13= Button(lower_frame, text="D",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("D"))
-btn13.grid(column=4, row=2)
-btn14 = Button(lower_frame, text="F",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("F"))
-btn14.grid(column=5, row=2)
-btn15 = Button(lower_frame, text="G",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("G"))
-btn15.grid(column=6, row=2)
-btn16 = Button(lower_frame, text="H",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("H"))
-btn16.grid(column=7, row=2)
-btn17 = Button(lower_frame, text="J",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("J"))
-btn17.grid(column=8, row=2)
-btn18 = Button(lower_frame, text="K",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("K"))
-btn18.grid(column=9, row=2)
-btn19 = Button(lower_frame, text="L",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("L"))
-btn19.grid(column=10, row=2)
-
-btn31 = Button(lower_frame, text="Z",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("Z"))
-btn31.grid(column=3, row=3)
-btn32 = Button(lower_frame, text="X",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("X"))
-btn32.grid(column=4, row=3)
-btn33 = Button(lower_frame, text="C",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("C"))
-btn33.grid(column=5, row=3)
-btn34 = Button(lower_frame, text="V",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("V"))
-btn34.grid(column=6, row=3)
-btn35 = Button(lower_frame, text="B",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("B"))
-btn35.grid(column=7, row=3)
-btn36 = Button(lower_frame, text="N",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("N"))
-btn36.grid(column=8, row=3)
-btn37 = Button(lower_frame, text="M",bg="skyBlue", fg="Black",width=3,height=1,font=('Helvetica','20'),command=lambda: clicked("M"))
-btn37.grid(column=9, row=3)
 text = Text(hangmanimageframe)
 text.pack()
 logtext=Text(hangmanlogframe)
@@ -190,12 +140,19 @@ def startTimer():
 def stopTimer():
     global _timer
     watchvalue.after_cancel(_timer)
-def clicked(alphabet):
+
+def fill():  
+    printtoScreen(resultstring(fullword,inputword,guessedwords))
+    displayHangMan(balancetries) 
+    displayHangManLog(logmessages[balancetries])  
+
+def clicked(alphabet):       
     global balancetries    
     global inputword
     global fullword
     global guessedwords  
     global uniqueletterscount  
+    global alphabetsrow    
     inputword = alphabet.upper()    
     if(inputword in fullword):
         if(inputword not in guessedwords):
@@ -216,10 +173,20 @@ def clicked(alphabet):
         else:            
             root.destroy()
 
-def fill():  
-    printtoScreen(resultstring(fullword,inputword,guessedwords))
-    displayHangMan(balancetries) 
-    displayHangManLog(logmessages[balancetries])            
+
+def createkeyboard():
+    global alphabetsrow
+    i = 0
+    j = 0
+    for row in alphabetsrow:
+        for letter in row:
+            buttonprint = Button(lower_frame,text=letter.upper(),bg="skyBlue",fg="Black",width=3,height=1,font=('Helvetica','20'),command= lambda t=letter: clicked(t))            
+            buttonprint.grid(column=i,row=j)            
+            i+=1
+        j+=1
+        i=j
+
+createkeyboard()     
 
 startTimer()       
 startthegame()
