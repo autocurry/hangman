@@ -3,6 +3,9 @@ from tkinter import *
 from main import *
 import time
 from tkinter import messagebox
+import logging
+
+logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='w', format='%(asctime)s - %(message)s')
 
 score='some score'
 balancetries = 6
@@ -27,6 +30,7 @@ _timer = None
 totalscore = len(wordlist)
 correctanswer = 0
 
+logging.info('starting the application lines')
 
 root=tk.Tk()
 root.title("Save the - INVESTOMAN")
@@ -97,7 +101,9 @@ def displayHangManLog(logmessage):
     logtext.insert(INSERT,logmessage)
 def Windupthegame():
     stopTimer()
-    messagebox.showinfo("Game Over", f'You reached the end of Game \n Your total score is: {scorevalue.get()} \n Your time is: {watchvalue.get()}')
+    finalmessage="Game Over", f'You reached the end of Game \n Your total score is: {scorevalue.get()} \n Your time is: {watchvalue.get()}'
+    logging.info(finalmessage)
+    messagebox.showinfo(finalmessage)
     
 def startthegame():   
     global fullword
@@ -146,7 +152,8 @@ def fill():
     displayHangMan(balancetries) 
     displayHangManLog(logmessages[balancetries])  
 
-def clicked(alphabet):       
+def clicked(alphabet):   
+    logging.info(f'inside clicked method, alphabet clicked is:  {alphabet}')    
     global balancetries    
     global inputword
     global fullword
@@ -175,6 +182,7 @@ def clicked(alphabet):
 
 
 def createkeyboard():
+    logging.info('inside createkeyboard method')
     global alphabetsrow
     i = 0
     j = 0
